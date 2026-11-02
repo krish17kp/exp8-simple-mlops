@@ -1,0 +1,15 @@
+services:
+  streamlit:
+    build: .
+    ports: ["8501:8501"]
+  metrics:
+    build: .
+    command: ["python", "metrics_service.py"]
+    ports: ["8000:8000"]
+  prometheus:
+    image: prom/prometheus
+    ports: ["9090:9090"]
+    volumes: ["./prometheus.yml:/etc/prometheus/prometheus.yml:ro"]
+  grafana:
+    image: grafana/grafana
+    ports: ["3000:3000"]
